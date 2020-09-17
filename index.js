@@ -41,8 +41,32 @@ class Airplane {
 */
 
 class Person {
+  constructor(attributes) {
+    this.name = attributes.name;
+    this.age = attributes.age;
+    this.stomach = [];
+  } //closes constructor
+  eat(edible) {
+    if(this.stomach.length < 10)
+    this.stomach.push(edible)
+  }//closes eat
 
+  poop() {
+    this.stomach = [];
+  }//closes poop
+
+toString() {
+  return `${this.name}, ${this.age}`
 }
+} //closes Person
+
+const person1 = new Person({
+  name: 'Juan',
+  age: 18,
+});
+
+console.log(person1.eat('Pizza'))
+console.log(person1)
 
 /*
   TASK 2
@@ -59,7 +83,26 @@ class Person {
 */
 
 class Car {
+  constructor(attributes) {
+    this.model = attributes.model;
+    this.milesPerGallon = attributes.milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
+  }
+  fill(gallons) {
+    this.tank = this.tank + gallons;
+  }
 
+  drive(distance) {
+    const range = this.tank * this.milesPerGallon;
+    if(range >= distance){
+      this.odometer = this.odometer + distance;
+      this.tank = (range - distance) / this.milesPerGallon;
+    } else {
+      this.tank = 0 ;
+      console.log(`I ran out of fuel at ${this.odometer} + (${distance} - (${distance} - ${range}))`)
+    }
+  }
 }
 
 /*
@@ -75,7 +118,14 @@ class Car {
         + {name} and {location} of course come from the instance's own properties.
 */
 class Lambdasian {
-
+  constructor(attributes) {
+    this.name = attributes.name;
+    this.age = attributes.age;
+    this.location = attributes.location;
+  }
+  speak() {
+    return `Hello my name is {this.name}, I am from {this.location}`;
+  }
 }
 
 /*
@@ -132,6 +182,12 @@ class ProjectManager {
 
 }
 
+
+
+
+
+
+
 /*
   STRETCH PROBLEM (no tests!)
     - Extend the functionality of the Student by adding a prop called grade and setting it equal to a number between 1-100.
@@ -154,5 +210,3 @@ if (typeof exports !== 'undefined') {
   if (Student) { module.exports.Student = Student }
   if (ProjectManager) { module.exports.ProjectManager = ProjectManager }
 }
-
-//test
